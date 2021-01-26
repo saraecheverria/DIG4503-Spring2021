@@ -5,3 +5,4 @@ class Sara extends Person{
         super ("Sara", '#DCEAF4'); 
     }
 }
+export default Sara; 

@@ -1,4 +1,4 @@
-import Person from './Person.js'; 
+import Sara from './Sara.js'; 
 
-const p = new Person ('Sara', '#DCEAF4'); 
+const p = new Sara ('Sara', '#DCEAF4'); 
 p.speak(); 
