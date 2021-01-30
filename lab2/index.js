@@ -1,4 +1,7 @@
 import Fetch from './Fetch.js'; 
 
-const p = new Fetch ('pikachu', '#84C6D6'); 
+const p = new Fetch ('pikachu', '#FFD73E'); 
+
+const s = new Fetch ('null', 'null'); 
 p.fetch(); 
+s.fetch(); 
