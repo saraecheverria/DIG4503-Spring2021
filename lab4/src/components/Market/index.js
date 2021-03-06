@@ -1,5 +1,7 @@
 import React from 'react'; 
 import MarketItem from '../MarketItem'; 
+import NameForm from '../NameForm';
+import Remove from '../Remove'; 
 
 class Market extends React.Component{ 
 
@@ -13,15 +15,22 @@ class Market extends React.Component{
 
     render(){ 
         return( 
-            <div> 
-                <p>Click to add items</p>
+            <div className = "App"> 
+                <p>Portfolio 1 Assignment</p>
 
                 <button onClick={() => {
                     const items = this.state.items; 
                     items.push(<MarketItem count = {items.length}/>); 
                     this.setState({items: items}); 
-                }}>Click Here!</button>
-                
+                }}>Add Items!</button>
+
+                <button onClick={() => {
+                    const items = this.state.items; 
+                    items.pop(<Remove count = {items.length}/>); 
+                    this.setState({items: items}); 
+                }}>Remove Items!</button>
+
+                <NameForm></NameForm> 
                 <div> 
                     {this.state.items.map((count,key) => {
                         return <div key ={key}>{count}</div>
