@@ -1,33 +1,29 @@
+import Database from "./Database.js";
+
 import Express from "express";
-import Database from './Database.js';
 
 const App = Express();
 const port = 45030;
-const d = new Database();
+
+const db = new Database();
+
+db.connect();
 
 App.use(Express.json());
 
 App.put("/people/create", (req, res) => {
-    let person = req.body.person
-    d.createOne(person) 
-    res.json({person: person,
-        body: req.body
-    })
-    ;
-    });
+  let fName = req.body.firstName;
+  let lName = req.body.lastName;
+  let fColor = req.body.favoriteColor;
 
-App.get('/people/:person', (req, res) => {
-    let person = req.params.person;
-    d.readOne(person)
-    res.json(
-        {person: person,
-        person: req.query
-    }
-    
-)
-console.log(req.query.firstName, req.query.LastName, req.query.favoriteColor)
+  db.createOne(fName, lName, fColor).then((response) => res.json(response));
 });
 
-App.listen(port, function(){
-    console.log("Server running!");
+App.get("/people/:person", (req, res) => {
+  let search = req.params.person;
+  db.readOne(search).then((response) => res.json(response));
 });
+
+App.listen(port, () => {
+  console.log("Server is running.");
+}); 

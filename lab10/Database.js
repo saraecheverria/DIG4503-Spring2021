@@ -12,35 +12,37 @@ export default class Database {
     async connect() {
         this.connection = await MongoClient.connect(url, { useUnifiedTopology: true });
         this.database = this.connection.db("lab10");
-        this.collection = this.database.collection("People");
+        this.collection = this.database.collection("people");
     }
 
-    async createOne() {
-            if(this.collection != null) {
-              let results = await this.collection.insertOne({
-                "firstName": "Sara", 
-                "lastName": "Echeverria", 
-                "favoriteColor": "green"
-              })
-              return results
-            }
-        }
+    async createOne(fName, lName, fColor) {
+      if (this.collection != null) {
+        let newData = {
+          firstName: fName,
+          lastName: lName,
+          favoriteColor: fColor,
+        };
+        await this.collection.insertOne(newData);
+        return newData;
+      }
+    }
 
-        async readOne() {
-            if(this.collection != null) {
-               let results = await this.collection.findOne({
-                "firstName": " ", 
-                "lastName": " ", 
-                "favoriteColor": " "
-               })
-               return results
-            }
+    async readOne(person) {
+      if (this.collection != null) {
+        let searchData = { search: "not found" };
+        let results = await this.collection.findOne({
+          firstName: person,
+        });
+        if (results != null) {
+          searchData = results;
         }
-    
-        
-        close() {
-            if(this.collection != null) {
-            this.collection.close();
-            }
+        return searchData;
+      }
+    }
+  
+    close() {
+      if (this.connection != null) {
+        this.connection.close();
+      }
     }
 }
