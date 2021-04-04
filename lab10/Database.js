@@ -15,13 +15,14 @@ export default class Database {
         this.collection = this.database.collection("people");
     }
 
-    async createOne(fName, lName, fColor) {
+    async createOne(firstName, lastName, faveColor) {
       if (this.collection != null) {
         let newData = {
-          firstName: fName,
-          lastName: lName,
-          favoriteColor: fColor,
+          firstName: firstName,
+          lastName: lastName,
+          favoriteColor: faveColor,
         };
+        
         await this.collection.insertOne(newData);
         return newData;
       }
